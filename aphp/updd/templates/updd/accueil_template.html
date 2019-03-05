@@ -1,0 +1,132 @@
+{% extends 'updd/base.html' %}
+{% load i18n %}
+{% load filters %}
+{% block title %}
+<h4>{% trans 'Accueil'%}</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container" id="accueil-container-menu">
+    {% if request.user|has_group:"medecin" %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans "Recherche de dossiers (DMP)" %}</div>
+                  <a href="{% url 'liste_dossier_patient' 1 %}"><div class="card-body"> <i class="fa fa-search"></i> </div></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Voir mon agenda' %}</div>
+                  <a href="{% url 'agenda' %}"><div class="card-body"> <i class="fa fa-calendar"></i> </div></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans "Visualisation d'ordonnance" %}</div>
+                  <a href="{% url 'liste_ordo' 1%}"><div class="card-body"> <i class="fa fa-eye"></i> </div></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Mon profil'%}</div>
+                  <a href="{% url 'profil' %}"><div class="card-body"> <i class="fa fa-user"></i> </div></a>
+                </div>
+            </div>
+        </div>
+
+    {% elif request.user|has_group:"secretaire" %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Recherche de dossiers (DMP)' %}</div>
+                  <a href="{% url 'liste_dossier_patient' 1 %}"><div class="card-body"> <i class="fa fa-search"></i> </div></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans "Ajout d'un patient" %}</div>
+                  <a href="#"><div class="card-body"> <i class="fa fa-plus"></i> </div></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Gestion de planning' %}</div>
+                  <a href="{% url 'agenda' %}"><div class="card-body"> <i class="fa fa-calendar"></i> </div></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Saisie de documents' %}</div>
+                  <a href="#" data-toggle="modal" data-target="#myModal"><div class="card-body"> <i class="fa fa-file"></i> </div></a>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+
+                    <div class="modal-header">
+                      <h4 class="modal-title">{% trans 'Choix du type de documents' %}</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <a href="{% url 'new_diagnostic' %}">{% trans 'Diagnostic' %}</a>
+                        <br>
+                        <a href="{% url 'new_ordonnance' %}">{% trans 'Ordonnance' %}</a>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans 'Fermer' %}</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Mon profil' %}</div>
+                  <a href="{% url 'profil' %}"><div class="card-body"> <i class="fa fa-user"></i> </div></a>
+                </div>
+            </div>
+        </div>
+    {% elif request.user|has_group:"infirmier" %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd"> {% trans 'Recherche de dossiers (DMP)' %}</div>
+                  <a href="{% url 'liste_dossier_patient' 1 %}"><div class="card-body"> <i class="fa fa-search"></i> </div></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Valider une posologie' %}</div>
+                  <a href="#"><div class="card-body"> <i class="fa fa-check"></i> </div></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Rédiger une feuille de soin' %}</div>
+                  <a href="{% url 'new_soin' %}"><div class="card-body"> <i class="fa fa-file"></i> </div></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Mon profil' %}</div>
+                  <a href="{% url 'profil' %}"><div class="card-body"> <i class="fa fa-user"></i> </div></a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header bg-uppd">{% trans 'Administration' %}</div>
+                  <a href="{% url 'admin:index'%}"><div class="card-body"> <i class="fa fa-cog"></i> </div></a>
+                </div>
+            </div>
+
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'updd/base.html' %}
+{% load i18n %}
+{% load filters %}
+
+{% block title %}
+<h4> {% trans 'Nouvelle ordonnance'%}</h4>
+{% endblock %}
+
+{% if forms.docform.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <ul>
+        {% for error in form.non_field_errors %}
+            <li> {{ error|escape }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+{% if forms.ordoform.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <ul>
+        {% for error in form.non_field_errors %}
+            <li> {{ error|escape }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+{% if forms.docform.errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{form.errors}}
+    </div>
+{% endif %}
+{% if forms.ordoform.errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{form.errors}}
+    </div>
+{% endif %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_texte">{{ forms.ordoform.texte.label_tag }}</label>
+            {{ forms.ordoform.texte|add_class:"form-control"}}
+        </div>
+        <div class="form-group">
+            <label for="id_dossier">{{forms.docform.dossier.label_tag}}</label>
+            {{forms.docform.dossier|add_class:"custom-select"}}
+        </div>
+        <div class="form-group">
+            <label for="{{forms.ordoform.commanditaire.id}}">{{ forms.ordoform.commanditaire.label_tag}}</label>
+            <select id="{{forms.ordoform.commanditaire.id}}" name="{{forms.ordoform.commanditaire.name}}" class="custom-select">
+            {% for value, text in forms.ordoform.commanditaire.field.choices %}
+                    <option value="{{value}}">{{text}}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div class="form-group" id="id_complet_block">
+            {{forms.docform.complet.label_tag}}
+            {{ forms.docform.complet}}
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">{% trans "Enregistrer l'ordonnance" %}</button>
+        </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+<script>
+    $("#id_dossier").css("margin-bottom", "15px")
+
+    $(document).ready(function(){
+        $("#id_complet_block").hide();
+    });
+</script>
+{% endblock %}
+
+
+

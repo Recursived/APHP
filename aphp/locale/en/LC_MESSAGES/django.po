@@ -1,0 +1,698 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-05 15:27+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\aphp\settings.py:117
+msgid "Français"
+msgstr "French"
+
+#: .\aphp\settings.py:118
+msgid "english"
+msgstr "English"
+
+#: .\updd\forms.py:59
+msgid "Changer mon nom"
+msgstr "Edit my name"
+
+#: .\updd\forms.py:60
+msgid "Changer mon prénom"
+msgstr "Edit my surname"
+
+#: .\updd\forms.py:61
+msgid "Changer mon numéro de téléphone"
+msgstr "Edit my phone n°"
+
+#: .\updd\forms.py:62
+msgid "Changer mon adresse"
+msgstr "Edit my adress"
+
+#: .\updd\forms.py:63
+msgid "Effectuer une demande de réaffectation"
+msgstr "Request a reassignment"
+
+#: .\updd\forms.py:66
+msgid "Quelle est votre réaffectation"
+msgstr "What is your reassignment request"
+
+#: .\updd\forms.py:67
+msgid "Réaffecation"
+msgstr "Reassignment"
+
+#: .\updd\mixins.py:103
+msgid "Il faut être connnecté pour pouvoir accéder à cette page !"
+msgstr "You have to be loged in oder to access this page !"
+
+#: .\updd\mixins.py:106
+msgid "Vous n'avez pas le statut nécéssaire pour accéder à cette page !"
+msgstr "You don't have the necessary right to access this page !"
+
+#: .\updd\models.py:8 .\updd\models.py:104
+#: .\updd\templates\updd\liste_dossier_patient.html:26
+msgid "Nom"
+msgstr "Name"
+
+#: .\updd\models.py:57 .\updd\models.py:98
+msgid "Femme"
+msgstr "Women"
+
+#: .\updd\models.py:58 .\updd\models.py:99
+msgid "Homme"
+msgstr "Men"
+
+#: .\updd\models.py:64 .\updd\models.py:108
+#: .\updd\templates\updd\liste_dossier_patient.html:30
+msgid "Adresse"
+msgstr "Adress"
+
+#: .\updd\models.py:65 .\updd\models.py:107
+#: .\updd\templates\updd\liste_dossier_patient.html:28
+msgid "Téléphone"
+msgstr "Phone number"
+
+#: .\updd\models.py:66
+msgid "travaille_sur"
+msgstr ""
+
+#: .\updd\models.py:76
+msgid "dirige_pole"
+msgstr "working_on"
+
+#: .\updd\models.py:77
+msgid "dirige_service"
+msgstr "lead_service"
+
+#: .\updd\models.py:105
+msgid "Prenom"
+msgstr "Surname"
+
+#: .\updd\models.py:106 .\updd\templates\updd\liste_dossier_patient.html:29
+msgid "Date de naissance"
+msgstr "Date of birth"
+
+#: .\updd\models.py:109
+msgid "Numéro sécurite sociale"
+msgstr "Social security number"
+
+#: .\updd\models.py:125 .\updd\templates\updd\liste_ordo.html:24
+msgid "Auteur"
+msgstr "Author"
+
+#: .\updd\models.py:127 .\updd\models.py:145
+msgid "Terminé"
+msgstr "Done"
+
+#: .\updd\models.py:144
+msgid "Contenu ordonnance"
+msgstr "Prescription content"
+
+#: .\updd\models.py:146
+msgid "Commanditaire"
+msgstr "Sender"
+
+#: .\updd\models.py:153
+msgid "Chirurgie"
+msgstr "Surgery"
+
+#: .\updd\models.py:154
+msgid "Anesthésie"
+msgstr "Anesthesia"
+
+#: .\updd\models.py:155
+msgid "Obstétrique"
+msgstr "Obstetrics"
+
+#: .\updd\models.py:162
+msgid "Type de l'opération"
+msgstr "Operation type"
+
+#: .\updd\models.py:163
+msgid "Libelle de l'opération"
+msgstr "Surgery wording"
+
+#: .\updd\models.py:170
+msgid "Contenu fiche de soin"
+msgstr "Care sheet content"
+
+#: .\updd\models.py:186
+msgid "Objet du message"
+msgstr "Message object"
+
+#: .\updd\models.py:187
+msgid "a_envoye"
+msgstr "has_sent"
+
+#: .\updd\models.py:188
+msgid "Date d'envoi du message"
+msgstr "Sending date"
+
+#: .\updd\models.py:189
+msgid "Contenu du message"
+msgstr "Message content"
+
+#: .\updd\models.py:190
+msgid "a_recu"
+msgstr "has_received"
+
+#: .\updd\models.py:190
+msgid "Destinataire"
+msgstr "Addressee"
+
+#: .\updd\templates\registration\login.html:6
+msgid "Connexion"
+msgstr "Log in"
+
+#: .\updd\templates\registration\login.html:28
+msgid "Pour accéder à la page, il faut se connecter via le formulaire"
+msgstr "In order to access this page, you have to log in via the below form"
+
+#: .\updd\templates\registration\login.html:58
+msgid "Voir mot de passe"
+msgstr "See password"
+
+#: .\updd\templates\registration\login.html:61
+msgid "Se connecter"
+msgstr "Log in"
+
+#: .\updd\templates\registration\login.html:65
+msgid "Mot de passe oublié ?"
+msgstr "Forgot password ?"
+
+#: .\updd\templates\updd\accueil_template.html:5
+#: .\updd\templates\updd\base.html:141
+msgid "Accueil"
+msgstr "Homepage"
+
+#: .\updd\templates\updd\accueil_template.html:14
+#: .\updd\templates\updd\accueil_template.html:42
+#: .\updd\templates\updd\accueil_template.html:97
+msgid "Recherche de dossiers (DMP)"
+msgstr "Patient folder (DMP) search"
+
+#: .\updd\templates\updd\accueil_template.html:20
+msgid "Voir mon agenda"
+msgstr "See my agenda"
+
+#: .\updd\templates\updd\accueil_template.html:26
+msgid "Visualisation d'ordonnance"
+msgstr "Prescription vizualisation"
+
+#: .\updd\templates\updd\accueil_template.html:32
+#: .\updd\templates\updd\accueil_template.html:88
+#: .\updd\templates\updd\accueil_template.html:115
+#: .\updd\templates\updd\base.html:158 .\updd\templates\updd\base.html:166
+#: .\updd\templates\updd\base.html:173
+msgid "Mon profil"
+msgstr "My profil"
+
+#: .\updd\templates\updd\accueil_template.html:48
+msgid "Ajout d'un patient"
+msgstr "Add new patient"
+
+#: .\updd\templates\updd\accueil_template.html:54
+msgid "Gestion de planning"
+msgstr "Planning management"
+
+#: .\updd\templates\updd\accueil_template.html:60
+msgid "Saisie de documents"
+msgstr "Edit document"
+
+#: .\updd\templates\updd\accueil_template.html:69
+msgid "Choix du type de documents"
+msgstr "Select document type"
+
+#: .\updd\templates\updd\accueil_template.html:74
+#: .\updd\templates\updd\base.html:103 .\updd\templates\updd\base.html:165
+msgid "Diagnostic"
+msgstr "Diagnosis"
+
+#: .\updd\templates\updd\accueil_template.html:76
+#: .\updd\templates\updd\base.html:104 .\updd\templates\updd\base.html:165
+msgid "Ordonnance"
+msgstr "Prescription"
+
+#: .\updd\templates\updd\accueil_template.html:80
+#: .\updd\templates\updd\dossier_patient.html:132
+#: .\updd\templates\updd\dossier_patient.html:179
+#: .\updd\templates\updd\dossier_patient.html:236
+#: .\updd\templates\updd\dossier_patient.html:283
+#: .\updd\templates\updd\dossier_patient.html:335
+#: .\updd\templates\updd\dossier_patient.html:377
+#: .\updd\templates\updd\messagerie_view.html:147
+msgid "Fermer"
+msgstr "Close"
+
+#: .\updd\templates\updd\accueil_template.html:103
+msgid "Valider une posologie"
+msgstr "Dosage validation"
+
+#: .\updd\templates\updd\accueil_template.html:109
+#: .\updd\templates\updd\base.html:172
+msgid "Rédiger une feuille de soin"
+msgstr "Draft a care sheet"
+
+#: .\updd\templates\updd\accueil_template.html:124
+#: .\updd\templates\updd\base.html:130 .\updd\templates\updd\base.html:177
+msgid "Administration"
+msgstr "Administration"
+
+#: .\updd\templates\updd\agenda_view.html:5
+msgid "Mon agenda"
+msgstr "My agenda"
+
+#: .\updd\templates\updd\base.html:50
+msgid "Médecin:"
+msgstr "Doctor : "
+
+#: .\updd\templates\updd\base.html:52
+msgid "Secrétaire :"
+msgstr "Secretary :"
+
+#: .\updd\templates\updd\base.html:54
+msgid "Infirmier.ère :"
+msgstr "Nurse : "
+
+#: .\updd\templates\updd\base.html:56
+msgid "Aucun rôle:"
+msgstr "No role : "
+
+#: .\updd\templates\updd\base.html:61 .\updd\templates\updd\base.html:143
+#: .\updd\templates\updd\messagerie_view.html:7
+#: .\updd\templates\updd\notification_view.html:6
+msgid "Messagerie"
+msgstr "Mail box"
+
+#: .\updd\templates\updd\base.html:63 .\updd\templates\updd\base.html:145
+msgid "Paramètres/Aide"
+msgstr "Preferences/Help"
+
+#: .\updd\templates\updd\base.html:67 .\updd\templates\updd\base.html:147
+msgid "Déconnexion"
+msgstr "Log out"
+
+#: .\updd\templates\updd\base.html:69 .\updd\templates\updd\base.html:149
+msgid "Notification"
+msgstr "Notification"
+
+#: .\updd\templates\updd\base.html:76 .\updd\templates\updd\base.html:91
+msgid "Recherche dossier"
+msgstr "Folder search"
+
+#: .\updd\templates\updd\base.html:79
+msgid "Agenda"
+msgstr "Agenda"
+
+#: .\updd\templates\updd\base.html:82
+msgid "Voir Ordonnance"
+msgstr "Prescription vizualisation"
+
+#: .\updd\templates\updd\base.html:85 .\updd\templates\updd\base.html:109
+#: .\updd\templates\updd\base.html:124 .\updd\templates\updd\profil_view.html:6
+msgid "Profil"
+msgstr "Profile"
+
+#: .\updd\templates\updd\base.html:94 .\updd\templates\updd\base.html:163
+msgid "Ajouter patient"
+msgstr "Add patient"
+
+#: .\updd\templates\updd\base.html:97 .\updd\templates\updd\base.html:164
+msgid "Gestion planning"
+msgstr "Planning management"
+
+#: .\updd\templates\updd\base.html:101 .\updd\templates\updd\base.html:165
+msgid "Saisie docs"
+msgstr "Write docs"
+
+#: .\updd\templates\updd\base.html:115 .\updd\templates\updd\base.html:155
+#: .\updd\templates\updd\base.html:162 .\updd\templates\updd\base.html:170
+#: .\updd\templates\updd\liste_dossier_patient.html:5
+msgid "Recherche de dossier"
+msgstr "Folder search"
+
+#: .\updd\templates\updd\base.html:118 .\updd\templates\updd\base.html:156
+#: .\updd\templates\updd\base.html:171
+msgid "Validation posologie"
+msgstr "Dosage validation"
+
+#: .\updd\templates\updd\base.html:121
+msgid "Rédiger feuille de soin"
+msgstr "Draft a care sheet"
+
+#: .\updd\templates\updd\base.html:157
+msgid "Voir les ordonnances à valider"
+msgstr "See prescription.s to validate"
+
+#: .\updd\templates\updd\dossier_patient.html:6
+msgid "Dossier de "
+msgstr "Record of"
+
+#: .\updd\templates\updd\dossier_patient.html:15
+msgid "Nom Prénom : "
+msgstr "Name Surname : "
+
+#: .\updd\templates\updd\dossier_patient.html:27
+msgid "Téléphone : "
+msgstr "Phone number : "
+
+#: .\updd\templates\updd\dossier_patient.html:30
+msgid "Numéro de sécurité sociale : "
+msgstr "Social security number : "
+
+#: .\updd\templates\updd\dossier_patient.html:34
+msgid "Adresse : "
+msgstr "Adress : "
+
+#: .\updd\templates\updd\dossier_patient.html:43
+msgid "Operations"
+msgstr "Operations"
+
+#: .\updd\templates\updd\dossier_patient.html:44
+msgid "Ordonnances"
+msgstr "Prescriptions"
+
+#: .\updd\templates\updd\dossier_patient.html:45
+msgid "Diagnostics"
+msgstr "Diagnosis"
+
+#: .\updd\templates\updd\dossier_patient.html:46
+msgid "Soins"
+msgstr "Treatment"
+
+#: .\updd\templates\updd\dossier_patient.html:54
+#: .\updd\templates\updd\liste_dossier_patient.html:18
+#: .\updd\templates\updd\liste_ordo.html:18
+msgid "Votre filtre"
+msgstr "Your filter"
+
+#: .\updd\templates\updd\dossier_patient.html:64
+#: .\updd\templates\updd\dossier_patient.html:79
+#: .\updd\templates\updd\dossier_patient.html:106
+#: .\updd\templates\updd\dossier_patient.html:153
+#: .\updd\templates\updd\dossier_patient.html:210
+#: .\updd\templates\updd\dossier_patient.html:257
+#: .\updd\templates\updd\dossier_patient.html:314
+#: .\updd\templates\updd\dossier_patient.html:356
+msgid "Fait par : "
+msgstr "Made by : "
+
+#: .\updd\templates\updd\dossier_patient.html:65
+#: .\updd\templates\updd\dossier_patient.html:80
+msgid "Type : "
+msgstr "Type : "
+
+#: .\updd\templates\updd\dossier_patient.html:65
+#: .\updd\templates\updd\dossier_patient.html:80
+msgid "Libelle : "
+msgstr "Wording : "
+
+#: .\updd\templates\updd\dossier_patient.html:69
+#: .\updd\templates\updd\dossier_patient.html:84
+#: .\updd\templates\updd\dossier_patient.html:141
+#: .\updd\templates\updd\dossier_patient.html:188
+#: .\updd\templates\updd\dossier_patient.html:245
+#: .\updd\templates\updd\dossier_patient.html:292
+#: .\updd\templates\updd\dossier_patient.html:344
+#: .\updd\templates\updd\dossier_patient.html:386
+msgid "Fait le : "
+msgstr "Made the : "
+
+#: .\updd\templates\updd\dossier_patient.html:94
+msgid "Aucun document 'operation' est disponible"
+msgstr "No 'operation' document is available"
+
+#: .\updd\templates\updd\dossier_patient.html:114
+#: .\updd\templates\updd\dossier_patient.html:161
+#: .\updd\templates\updd\dossier_patient.html:218
+#: .\updd\templates\updd\dossier_patient.html:265
+#: .\updd\templates\updd\dossier_patient.html:317
+#: .\updd\templates\updd\dossier_patient.html:359
+msgid "Contenu : "
+msgstr "Content : "
+
+#: .\updd\templates\updd\dossier_patient.html:121
+#: .\updd\templates\updd\dossier_patient.html:168
+msgid "Contenu du diagnostic"
+msgstr "Content of the diagnosis"
+
+#: .\updd\templates\updd\dossier_patient.html:198
+#: .\updd\templates\updd\dossier_patient.html:302
+msgid "Aucun document 'ordonnance' est disponible"
+msgstr ""
+
+#: .\updd\templates\updd\dossier_patient.html:225
+#: .\updd\templates\updd\dossier_patient.html:272
+msgid "Contenu de l'ordonnance"
+msgstr "Content of the prescription"
+
+#: .\updd\templates\updd\dossier_patient.html:324
+#: .\updd\templates\updd\dossier_patient.html:366
+msgid "Contenu de la fiche de soin"
+msgstr "Content of the care sheet"
+
+#: .\updd\templates\updd\dossier_patient.html:396
+msgid "Aucun document 'soin' est disponible"
+msgstr "No 'treatment' document is available"
+
+#: .\updd\templates\updd\liste_dossier_patient.html:11
+msgid "Aucun dossier disponible"
+msgstr "No folder available"
+
+#: .\updd\templates\updd\liste_dossier_patient.html:16
+#: .\updd\templates\updd\liste_ordo.html:16
+msgid "Recherche sur"
+msgstr "Search on"
+
+#: .\updd\templates\updd\liste_dossier_patient.html:20
+msgid "Nombre total de dossier : "
+msgstr "Total number of folder : "
+
+#: .\updd\templates\updd\liste_dossier_patient.html:25
+msgid "Num Sécu"
+msgstr "Social sec. number"
+
+#: .\updd\templates\updd\liste_dossier_patient.html:27
+msgid "Prénom"
+msgstr "Surname"
+
+#: .\updd\templates\updd\liste_ordo.html:5
+msgid "Ordonnance.s à valider"
+msgstr "Prescription.s to validate"
+
+#: .\updd\templates\updd\liste_ordo.html:11
+msgid "Aucune ordonnance disponible"
+msgstr "No prescription available"
+
+#: .\updd\templates\updd\liste_ordo.html:20
+msgid "Nombre total d'ordonnance : "
+msgstr "Total number of prescription : "
+
+#: .\updd\templates\updd\liste_ordo.html:25
+msgid "Date de création"
+msgstr "Creation date"
+
+#: .\updd\templates\updd\messagerie_view.html:30
+msgid "Aucun message disponible"
+msgstr "No message available"
+
+#: .\updd\templates\updd\messagerie_view.html:47
+msgid "Erreur sur le message - Auteur et destinataire correspondant"
+msgstr "Error on this message - author and adressee are the same"
+
+#: .\updd\templates\updd\messagerie_view.html:49
+msgid "Message envoyé  : "
+msgstr "Message sent : "
+
+#: .\updd\templates\updd\messagerie_view.html:51
+msgid "Message reçu : "
+msgstr "Message received : "
+
+#: .\updd\templates\updd\messagerie_view.html:55
+msgid "Ouvrir/Fermer"
+msgstr "Open/Close"
+
+#: .\updd\templates\updd\messagerie_view.html:62
+msgid "Objet : "
+msgstr "Object : "
+
+#: .\updd\templates\updd\messagerie_view.html:103
+msgid "Envoyer un message"
+msgstr "Send a message"
+
+#: .\updd\templates\updd\messagerie_view.html:148
+msgid "Envoyer le message"
+msgstr "Send this message"
+
+#: .\updd\templates\updd\new_diagnostic.html:6
+msgid "Nouveau diagnostic"
+msgstr "New diagnosis"
+
+#: .\updd\templates\updd\new_diagnostic.html:65
+#: .\updd\templates\updd\new_ordonnance.html:67
+msgid "Enregistrer l'ordonnance"
+msgstr "Save prescription"
+
+#: .\updd\templates\updd\new_dmp.html:13
+msgid "Création d'un dossier médical"
+msgstr "Creation of a DMP"
+
+#: .\updd\templates\updd\new_dmp.html:91
+msgid "Enregistrer le dossier"
+msgstr "Save the DMP"
+
+#: .\updd\templates\updd\new_ordonnance.html:6
+msgid "Nouvelle ordonnance"
+msgstr "New prescription"
+
+#: .\updd\templates\updd\new_soin.html:6
+msgid "Nouvelle fiche de soin"
+msgstr "New care sheet"
+
+#: .\updd\templates\updd\new_soin.html:59
+msgid "Enregistrer la fiche de soin"
+msgstr "Save care sheet"
+
+#: .\updd\templates\updd\notification_view.html:15
+msgid "Vous avez reçu une notification : "
+msgstr "You received a notification : "
+
+#: .\updd\templates\updd\notification_view.html:21
+msgid "Aucune notification disponible"
+msgstr "No notification available"
+
+#: .\updd\templates\updd\profil_view.html:25
+msgid "Modifier son profil"
+msgstr "Modify profile"
+
+#: .\updd\templates\updd\profil_view.html:25
+msgid "Modifier"
+msgstr "Modify"
+
+#: .\updd\templates\updd\profil_view.html:28
+msgid "Nom :"
+msgstr "Name : "
+
+#: .\updd\templates\updd\profil_view.html:29
+msgid "Prenom :"
+msgstr "Surname : "
+
+#: .\updd\templates\updd\profil_view.html:31
+msgid "Téléphone :"
+msgstr "Phone number : "
+
+#: .\updd\templates\updd\profil_view.html:32
+msgid "Adresse :"
+msgstr "Adress : "
+
+#: .\updd\templates\updd\profil_view.html:34
+msgid "Statut :"
+msgstr "Status : "
+
+#: .\updd\templates\updd\profil_view.html:35
+msgid "Affectation :"
+msgstr "Affectation : "
+
+#: .\updd\templates\updd\update_profil.html:6
+msgid "Changer mon profil"
+msgstr "Change my profile"
+
+#: .\updd\templates\updd\update_profil.html:55
+msgid "Envoyer une requête de modification"
+msgstr "Send a modification request"
+
+#: .\updd\templates\updd\validate_ordonnance.html:6
+msgid "Correction/Validation ordonnance"
+msgstr "Correct/Validate prescription"
+
+#: .\updd\templates\updd\validate_ordonnance.html:63
+msgid "Modifier/Enregistrer l'ordonnance"
+msgstr "Modify/Save prescription "
+
+#: .\updd\views.py:21
+msgid "Il faut se connecter avant d'utiliser l'application"
+msgstr "You have to be logged in in order to use the app"
+
+#: .\updd\views.py:107
+msgid ""
+"L'ordonnance a été enregistrée et une notification a été envoyé au "
+"commanditaire"
+msgstr "The prescription has been saved and a notification has been sent to the adressee"
+
+#: .\updd\views.py:108
+msgid "Création d'une ordonnance"
+msgstr "Create a prescription"
+
+#: .\updd\views.py:109
+#, python-format
+msgid ""
+"L'ordonnance du patient %s %s a été complétée, je vous prie de bien vouloir "
+"la valider ou me notifier les éléments inccorects."
+msgstr "The prescription of the patient %s %s has been complete, could you please "
+"validate it or notify me of the changes needed."
+
+#: .\updd\views.py:127
+msgid "Le diagnostic a été enregistré "
+msgstr "The diagnosis has been saved"
+
+#: .\updd\views.py:144
+msgid "La fiche de soin a été enregistré "
+msgstr "The care sheet has been saved"
+
+#: .\updd\views.py:198
+#, python-format
+msgid "Le dossier du patient %s %s a été créé."
+msgstr "The patient folder of %s %s has been created"
+
+#: .\updd\views.py:224
+msgid "Changement de profil"
+msgstr "Change of profile"
+
+#: .\updd\views.py:225
+#, python-format
+msgid ""
+"Bonjour,\n"
+" Je suis l'agent %s %s (%s) et je souhaite modifier mon profil."
+msgstr "Hello,\n  I'm the agent %s %s (%s) et I have a profile modification request"
+
+#: .\updd\views.py:234
+#, python-format
+msgid "Changement de profil - %s %s (%s) "
+msgstr "Change of profile - %s %s (%s)"
+
+#: .\updd\views.py:239
+#, python-format
+msgid ""
+"Bonjour, voici les nouvelles informations concernant mon profil :\n"
+" Nom : %s;\n"
+" Prénom : %s;\n"
+" Téléphone : %s;\n"
+" Adresse : %s;\n"
+" Reaffectation : %s"
+msgstr "Hello, here are my new profil information:\n"
+" Name : %s;\n"
+" Surname : %s;\n"
+" Phone n° : %s;\n"
+" Adress : %s;\n"
+" Reassignment : %s"
+
+#: .\updd\views.py:248
+msgid "Aucune reaffectation"
+msgstr "No reassignement"
+
+#: .\updd\views.py:293
+msgid "L'ordonnance a bien été modifiée et enregistrée."
+msgstr "The prescription modification have been saved."

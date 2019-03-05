@@ -1,0 +1,155 @@
+{% extends 'updd/base.html' %}
+{% load i18n %}
+{% load filters %}
+{% load humanize %}
+
+{% block title %}
+<h4>{% trans 'Messagerie' %}</h4>
+{% endblock %}
+
+{% block content %}
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <ul>
+            {% for error in form.non_field_errors %}
+                <li> {{ error|escape }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.errors}}
+        </div>
+    {% endif %}
+
+    {% if not listeMessage %}
+        <div class="alert alert-warning" style="width: 100%; margin-top:5px; text-align:center">
+          {% trans 'Aucun message disponible' %}
+        </div>
+    {% else %}
+        <div class="container">
+             <div id="accordion">
+             {% for msg in listeMessage %}
+               <div class="card">
+               {% if msg.author == user and msg.receiver == user %}
+                   <div class="card-header" style="background-color:#e900424d">
+               {% elif msg.author == user and msg.receiver != user  %}
+                     <div class="card-header" style="background-color:#d7ffd7">
+               {% else %}
+                     <div class="card-header" style="background-color:#7181f84d">
+               {% endif %}
+                  <div class="d-flex justify-content-between">
+                      <div class="p-1 mr-a">
+                          {% if msg.author == user and msg.receiver == user %}
+                            {% trans 'Erreur sur le message - Auteur et destinataire correspondant' %}
+                          {% elif msg.author == user and msg.receiver != user  %}
+                          <strong>{% trans 'Message envoyé  : ' %}</strong> {{ msg.receiver }} - {{ msg.date_message|naturaltime}}
+                          {% else %}
+                          <strong>{% trans 'Message reçu : ' %}</strong> {{ msg.author }} - {{ msg.date_message|naturaltime}}
+                          {% endif %}
+                      </div>
+                      <div class="p-1">
+                             <a class="card-link" data-toggle="collapse" href="#collapse{{forloop.counter}}"><i style="color:black" data-toggle="tooltip" data-placement="bottom" title="{% trans 'Ouvrir/Fermer' %}" class="fa fa-chevron-down"></i></a>
+                      </div>
+                  </div>
+
+                </div>
+                <div id="collapse{{forloop.counter}}" class="collapse" data-parent="#accordion">
+                  <div class="card-body">
+                      <b>{% trans 'Objet : '%}</b>{{msg.objet}}
+                      <br><br>
+                    {{msg.content}}
+                  </div>
+                </div>
+              </div>
+             {% endfor %}
+            </div>
+           <div class="d-flex justify-content-center">
+        {% if page_obj.has_previous %}
+            <div class="p-2 ">
+                <a href="{% url 'messagerie' 1 %}" class="btn btn-outline-dark"><i class="fa fa-angle-double-left"></i></a>
+                <a href="{% url 'messagerie' page_obj.previous_page_number %}" class="btn btn-outline-dark"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        {% else %}
+            <div class="p-2">
+                <a href="{% url 'messagerie' page_obj.start_index %}" class="btn btn-outline-dark disabled"><i class="fa fa-angle-double-left"></i></a>
+                <a href="#" class="btn btn-outline-dark disabled"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        {% endif %}
+            <div class="p-2">
+                <p><strong>{{ page_obj.number}}/{{ paginator.num_pages }}</strong></p>
+            </div>
+        {% if page_obj.has_next %}
+            <div class="p-2">
+                <a href="{% url 'messagerie' page_obj.next_page_number %}" class="btn btn-outline-dark"><i class="fa fa-chevron-right"></i></a>
+                <a href="{% url 'messagerie' paginator.num_pages %}" class="btn btn-outline-dark"><i class="fa fa-angle-double-right"></i></a>
+            </div>
+
+        {% else %}
+            <div class="p-2">
+                <a href="#" class="btn btn-outline-dark disabled"><i class="fa fa-chevron-right"></i></a>
+                <a href="{% url 'messagerie' paginator.num_pages %}" class="btn btn-outline-dark disabled"><i class="fa fa-angle-double-right"></i></a>
+            </div>
+        {% endif %}
+    </div>
+        </div>
+    {% endif %}
+    <!-- Button to Open the Modal -->
+    <div class="wrapper" style="text-align: center;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="top: 50%;">
+        {% trans 'Envoyer un message' %}
+        </button>
+    </div>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Envoyer un message</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+        <form method="post" action="{% url 'messagerie' page_obj.number %}">
+            {% csrf_token %}
+            <div class="container">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="{{form.receiver.id}}">{{ form.receiver.label_tag}}</label>
+                        <select id="{{form.receiver.id}}" name="{{form.receiver.name}}" class="custom-select">
+                        {% for value, text in form.receiver.field.choices %}
+                            {% if value != request.user.pk %}
+                                <option value="{{value}}">{{text}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="{{form.objet.id}}">{{ form.objet.label_tag}}</label>
+                      <input name="{{form.objet.name}}" type="text" class="form-control" id="{{form.objet.id}}">
+                    </div>
+                     <div class="form-group">
+                      <label for="{{form.content.id}}">{{form.content.label_tag}}</label>
+                      {{form.content|add_class:"form-control"}}
+                    </div>
+
+                </div>
+            </div>
+
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans 'Fermer' %}</button>
+            <input type="submit" value="{% trans 'Envoyer le message' %}" class="btn btn-primary btn-block" />
+
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}

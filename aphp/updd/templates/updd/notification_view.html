@@ -1,0 +1,62 @@
+{% extends 'updd/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+<h4>{% trans 'Notification' %}</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for notif in listenotif %}
+        <div class="media border p-3">
+              <img src="{% static 'updd/img/img_avatar6.png' %}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+              <div class="media-body">
+                <b>{% trans 'Vous avez reçu une notification : '%}<small><i>{{notif.raison}}</i></small></b>
+                <p>{{notif.content}}</p>
+              </div>
+            </div>
+    {% empty %}
+        <div class="alert alert-warning" style="width: 100%; margin-top:5px; text-align:center">
+              {% trans 'Aucune notification disponible' %}
+        </div>
+   {% endfor %}
+   <div class="d-flex justify-content-center">
+        {% if page_obj.has_previous %}
+            <div class="p-2 ">
+                <a href="{% url 'notification' 1 %}" class="btn btn-outline-dark"><i class="fa fa-angle-double-left"></i></a>
+                <a href="{% url 'notification' page_obj.previous_page_number %}" class="btn btn-outline-dark"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        {% else %}
+            <div class="p-2">
+                <a href="{% url 'notification' page_obj.start_index %}" class="btn btn-outline-dark disabled"><i class="fa fa-angle-double-left"></i></a>
+                <a href="#" class="btn btn-outline-dark disabled"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        {% endif %}
+            <div class="p-2">
+                <p><strong>{{ page_obj.number}}/{{ paginator.num_pages }}</strong></p>
+            </div>
+        {% if page_obj.has_next %}
+            <div class="p-2">
+                <a href="{% url 'notification' page_obj.next_page_number %}" class="btn btn-outline-dark"><i class="fa fa-chevron-right"></i></a>
+                <a href="{% url 'notification' paginator.num_pages %}" class="btn btn-outline-dark"><i class="fa fa-angle-double-right"></i></a>
+            </div>
+
+        {% else %}
+            <div class="p-2">
+                <a href="#" class="btn btn-outline-dark disabled"><i class="fa fa-chevron-right"></i></a>
+                <a href="{% url 'notification' paginator.num_pages %}" class="btn btn-outline-dark disabled"><i class="fa fa-angle-double-right"></i></a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+<div class="media border p-3">
+  <img src="img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+  <div class="media-body">
+    <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+    <p>Lorem ipsum...</p>
+  </div>
+</div>

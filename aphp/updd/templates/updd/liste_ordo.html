@@ -1,0 +1,106 @@
+{% extends 'updd/base.html' %}
+{% load i18n %}
+{% load humanize %}
+{% block title %}
+<h4> {% trans "Ordonnance.s à valider" %} </h4>
+{% endblock %}
+
+{% block content %}
+     {% if not listeordo %}
+        <div class="alert alert-warning" style="width: 100%; margin-top:5px; text-align:center">
+          {% trans 'Aucune ordonnance disponible' %}
+        </div>
+    {% else %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> {% trans 'Recherche sur' %} <i class="fa fa-search" style="margin-left:7px;"></i></span>
+            </div>
+            <input type="text" id="search-input-dossier" class="form-control" placeholder="{% trans 'Votre filtre' %}">
+        </div>
+        <p>{% trans "Nombre total d'ordonnance : " %} <span class="badge badge-pill badge-primary">{{ total_ordo }}</span></p>
+            <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>{% trans 'Auteur' %}</th>
+                    <th>{% trans 'Date de création' %}</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-dossier">
+
+            {% for ordo in listeordo %}
+
+                    <tr class="clickable-row" data-href="{% url 'validation_ordo' ordo.pk %}" style="cursor:pointer">
+                        <td datatype="auteur">{{ ordo.document.author}}</td>
+                        <td datatype="date_creation">{{ ordo.document.date_creation|naturaltime }}</td>
+                    </tr>
+
+
+            {% endfor %}
+    {% endif %}
+
+    </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+        {% if page_obj.has_previous %}
+            <div class="p-2 ">
+                <a href="{% url 'liste_ordo' 1 %}" class="btn btn-outline-dark"><i class="fa fa-angle-double-left"></i></a>
+                <a href="{% url 'liste_ordo' page_obj.previous_page_number %}" class="btn btn-outline-dark"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        {% else %}
+            <div class="p-2">
+                <a href="{% url 'liste_ordo' page_obj.start_index %}" class="btn btn-outline-dark disabled"><i class="fa fa-angle-double-left"></i></a>
+                <a href="#" class="btn btn-outline-dark disabled"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        {% endif %}
+            <div class="p-2">
+                <p><strong>{{ page_obj.number}}/{{ paginator.num_pages }}</strong></p>
+            </div>
+        {% if page_obj.has_next %}
+            <div class="p-2">
+                <a href="{% url 'liste_ordo' page_obj.next_page_number %}" class="btn btn-outline-dark"><i class="fa fa-chevron-right"></i></a>
+                <a href="{% url 'liste_ordo' paginator.num_pages %}" class="btn btn-outline-dark"><i class="fa fa-angle-double-right"></i></a>
+            </div>
+
+        {% else %}
+            <div class="p-2">
+                <a href="#" class="btn btn-outline-dark disabled"><i class="fa fa-chevron-right"></i></a>
+                <a href="{% url 'liste_ordo' paginator.num_pages %}" class="btn btn-outline-dark disabled"><i class="fa fa-angle-double-right"></i></a>
+            </div>
+        {% endif %}
+    </div>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+<script>
+    $("#choose-dropdown-menu > p ").click(function(){
+        if($(this).attr('bool') == "true"){
+            $(this).attr("bool", "false");
+            $(this).toggleClass('chosen-option');
+        } else {
+            $(this).attr("bool", "true");
+            $(this).toggleClass('chosen-option');
+        }
+
+    });
+</script>
+<script>
+    $(document).ready(function(){
+      $("#search-input-dossier").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#tbody-dossier tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+{% endblock %}
+

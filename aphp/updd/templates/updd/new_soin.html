@@ -1,0 +1,72 @@
+{% extends 'updd/base.html' %}
+{% load i18n %}
+{% load filters %}
+
+{% block title %}
+<h4> {% trans 'Nouvelle fiche de soin' %} </h4>
+{% endblock %}
+
+{% if forms.soinform.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <ul>
+        {% for error in form.non_field_errors %}
+            <li> {{ error|escape }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+{% if forms.ordoform.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <ul>
+        {% for error in form.non_field_errors %}
+            <li> {{ error|escape }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+{% if forms.soinform.errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{form.errors}}
+    </div>
+{% endif %}
+{% if forms.ordoform.errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{form.errors}}
+    </div>
+{% endif %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST" class="post-form" action="{% url 'new_soin'%}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="forms.soinform.texte.id">{{ forms.soinform.texte.label_tag }}</label>
+            {{ forms.soinform.texte|add_class:"form-control"}}
+        </div>
+        <div class="form-group">
+            <label for="forms.docform.dossier.id">{{forms.docform.dossier.label_tag}}</label>
+            {{forms.docform.dossier|add_class:"custom-select"}}
+        </div>
+        <div class="form-group">
+            {{forms.docform.complet.label_tag}}
+            {{ forms.docform.complet}}
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">{% trans "Enregistrer la fiche de soin" %}</button>
+        </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+<script>
+    $("#id_dossier").css("margin-bottom", "15px")
+</script>
+{% endblock %}
+
+
+

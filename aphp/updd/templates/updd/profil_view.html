@@ -1,0 +1,74 @@
+{% extends 'updd/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+<h4> {% trans "Profil" %} </h4>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="d-flex justify-content-start">
+        {% if  personne.sexe == "Homme" %}
+            <div class="p-1 mr-auto">
+                <img src="{% static 'updd/img/img_avatar1.png' %}" class="mx-auto d-block img-fluid">
+            </div>
+        {% else %}
+            <div class="p-1 mr-auto">
+                <img src="{% static 'updd/img/img_avatar6.png' %}" class="mx-auto d-block img-fluid">
+            </div>
+        {% endif %}
+        <div class="p-1 flex-grow-1">
+            <div class="d-flex flex-column">
+                <div class="d-flex justify-content-end">
+                    <a href="{% url 'profil_update' %}" data-toggle="tooltip" title="{% trans 'Modifier son profil'%}" class="btn btn-primary text-light p-2">{% trans 'Modifier' %} <i class="fa fa-pen"></i></a>
+                </div>
+            </div>
+            <p class="p-2">{% trans 'Nom :' %} {{personne.user.last_name}}</p>
+            <p class="p-2">{% trans 'Prenom :' %} {{personne.user.first_name}} </p>
+            <hr class="p-2">
+            <p class="p-2">{% trans 'Téléphone :' %} {{personne.telephone}}</p>
+            <p class="p-2">{% trans 'Adresse :' %} {{personne.adresse}}</p>
+            <hr class="p-2">
+            <p class="p-2">{% trans 'Statut :' %} {{personne.user.groups.all.0.name}}</p>
+            <p class="p-2">{% trans 'Affectation :' %} {{personne.affectation.structure.nom}}</p>
+            <div class="d-flex justify-content-between">
+                    <div class="p-1 mr-auto">
+                        <a class="btn btn-info" href="{% url 'messagerie' 1%}">
+                            {% if nb_message > 1%}
+                                Messages
+                            {% else %}
+                                Message
+                            {% endif %}
+                        <span class="badge badge-secondary">{{nb_message}}</span>
+                        </a>
+                    </div>
+                    <div class="p-1">
+                        <a class="btn btn-info" href="{% url 'notification' 1%}">
+                            {% if nb_message > 1%}
+                                Notifications
+                            {% else %}
+                                Notification
+                            {% endif %}
+                            <span class="badge badge-secondary">{{nb_notif}}</span>
+                        </a>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</div>
+{% endblock %}
+
+{% block script_block %}
+<script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+{% endblock %}

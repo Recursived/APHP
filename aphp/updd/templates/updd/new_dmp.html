@@ -1,0 +1,107 @@
+{% extends 'updd/base.html' %}
+{% load i18n %}
+{% load filters %}
+
+{% block head%}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{% endblock %}
+
+{% block title %}
+<h4>{% trans "Création d'un dossier médical" %}</h4>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <ul>
+                {% for error in form.non_field_errors %}
+                    <li> {{ error|escape }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.errors}}
+        </div>
+        {% endif %}
+
+
+    <form method="POST" action="{% url 'new_dmp' %}">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><div class="fa fa-user fa-fw"> </div> {{ form.nom.label_tag}} </span>
+            </div>
+            {{ form.nom|add_class:'form-control'}}
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><div class="fa fa-user fa-fw"> </div> {{ form.prenom.label_tag}} </span>
+            </div>
+            {{ form.prenom|add_class:'form-control'}}
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><div class="fa fa-calendar fa-fw"> </div> {{ form.date_naissance.label_tag}} </span>
+            </div>
+            {{ form.date_naissance|add_class:'form-control'}}
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><div class="fa fa-phone fa-fw"> </div> {{ form.telephone.label_tag}} </span>
+            </div>
+            {{ form.telephone|add_class:'form-control'}}
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><div class="fa fa-home fa-fw"></div> {{ form.adresse.label_tag}} </span>
+            </div>
+            {{ form.adresse|add_class:'form-control'}}
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><div class="fa fa-id-card fa-fw"> </div> {{ form.numsecu.label_tag}} </span>
+            </div>
+            {{ form.numsecu|add_class:'form-control'}}
+        </div>
+        <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><div class="fa fa-hospital fa-fw"> </div> {{ form.hospitalisation.label_tag}} </span>
+                </div>
+                <select id="{{form.hospitalisation.id}}" name="{{form.hospitalisation.name}}" class="custom-select">
+                {% for value, text in form.hospitalisation.field.choices %}
+                        <option value="{{value}}">{{text}}</option>
+                {% endfor %}
+                </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><div class="fa fa-transgender fa-fw"> </div> {{ form.sexe.label_tag}} </span>
+            </div>
+            {{ form.sexe|add_class:'form-control'}}
+        </div>
+    <input type="submit" value="{% trans 'Enregistrer le dossier' %}" class="btn btn-primary btn-block" />
+    </form>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+<script>
+    $(document).ready(function(){
+        $('label').css({'margin-bottom':'unset', 'margin-left':'10px'});
+        $('#id_date_naissance').datepicker({
+          changeMonth: true,
+          changeYear: true,
+          maxDate : "+0M +0D"
+        });
+    });
+</script>
+{% endblock %}

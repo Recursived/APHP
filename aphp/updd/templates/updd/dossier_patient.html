@@ -1,0 +1,455 @@
+{% extends 'updd/base.html' %}
+{% load i18n %}
+{% load filters %}
+
+{% block title %}
+<h4>{% trans 'Dossier de '%} {{patient.nom}} {{patient.prenom}}</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justifiy-content-between">
+                <div class="p-1 mr-auto">
+                    {% trans "Nom Prénom : " %}{{patient.nom}} {{patient.prenom}} ({{patient.date_naissance}})
+                </div>
+                <div class="p-1">
+                    <button type="button" class="btn btn-outline-dark" id="button-toggle-patient"><i id="icon-toggle-patient" class="fa fa-chevron-up"></i></button>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body" id="patient-card">
+            <div class="d-flex justify-content-between">
+                <div class="p-2">
+
+                    <p>{% trans "Téléphone : "%} {{patient.telephone}}</p>
+                </div>
+                <div class="p-2">
+                    <p>{% trans "Numéro de sécurité sociale : " %} {{patient.numsecu}}</p>
+
+                </div>
+                <div class="p-2">
+                    <p>{% trans "Adresse : "%} {{patient.adresse}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between">
+        <div class="p-1 mr-auto">
+            <div class="btn-group">
+                <button type="button" data-type="operation" class="btn btn-outline-info doc-button active">{% trans 'Operations' %}</button>
+                <button type="button" data-type="ordonnance" class="btn btn-outline-info doc-button">{% trans 'Ordonnances' %}</button>
+                <button type="button" data-type="diagnostic" class="btn btn-outline-info doc-button">{% trans 'Diagnostics' %}</button>
+                <button type="button" data-type="soin" class="btn btn-outline-info doc-button">{% trans 'Soins'%}</button>
+            </div>
+        </div>
+        <div class="p-1">
+            <div class="input-group mb-3 input-group-sm">
+                 <div class="input-group-prepend">
+                   <span class="input-group-text"><i class="fa fa-search"></i></span>
+                 </div>
+                 <input id="search-input-dossier" type="text" class="form-control" placeholder="{% trans 'Votre filtre' %}">
+            </div>
+        </div>
+    </div>
+
+    <div id="operation-block" class="row">
+        {% for operation in operations %}
+            {% if operation.document.complet %}
+                <div class="col-md-3">
+                    <div class="card" >
+                      <div class="card-header bg-info text-white">{% trans "Fait par : "%} {{operation.document.author.user.username}}</div>
+                      <div class="card-body" data-toggle="tooltip" data-placement="bottom" title="{% trans 'Type : '%} {{operation.type}}">{% trans "Libelle : " %} {{ operation.libelle }}</div>
+                      <div class="card-footer bg-info text-white">
+                          <div class="d-flex justify-content-end">
+                              <div class="p-1">
+                                  {% trans "Fait le : "%} {{operation.document.date_creation}}
+                              </div>
+                          </div>
+
+                      </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-3">
+                    <div class="card" >
+                      <div class="card-header bg-light text-dark">{% trans "Fait par : "%} {{operation.document.author.user.username}}</div>
+                      <div class="card-body" data-toggle="tooltip"  data-placement="bottom" title="{% trans 'Type : '%} {{operation.type}}">{% trans "Libelle : " %} {{ operation.libelle }}</div>
+                      <div class="card-footer bg-light text-dark">
+                          <div class="d-flex justify-content-end">
+                              <div class="p-1">
+                                  {% trans "Fait le : "%} {{operation.document.date_creation}}
+                              </div>
+                          </div>
+
+                      </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% empty %}
+            <div class="alert alert-warning" style="width: 100%; margin-top:5px; text-align:center">
+              {% trans "Aucun document 'operation' est disponible" %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="diagnostic-block" class="row">
+        {% for diagnostic in diagnostics %}
+            {% if diagnostic.document.complet %}
+                <div class="col-md-3">
+                    <div class="card" >
+                      <div class="card-header bg-info text-white">
+                          <div class="d-flex justifiy-content-between">
+                              <div class="p-1 mr-auto">{% trans "Fait par : "%} {{diagnostic.document.author.user.username}}</div>
+                              {% if request.user|has_group:"medecin" %}
+                                    <div class="p-1">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Valider/Modifer l'ordonnance"><i class="fa fa-plus"></i></a>
+                                    </div>
+                              {% endif %}
+                          </div>
+                      </div>
+                      <div class="card-body" data-toggle="modal" data-target="#myModalDiag{{ forloop.counter }}" >{% trans "Contenu : " %} {{diagnostic.observation|reduce_string:"25"}}</div>
+                      <div class="modal fade" id="myModalDiag{{ forloop.counter }}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">{% trans "Contenu du diagnostic" %}</h4>
+                              <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                               {{diagnostic.observation}}
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans "Fermer" %}</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer bg-info text-white">
+                          <div class="d-flex justify-content-end">
+                              <div class="p-1">
+                                  {% trans "Fait le : "%} {{diagnostic.document.date_creation}}
+                              </div>
+                          </div>
+
+                      </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-3">
+                    <div class="card" >
+                      <div class="card-header">
+                          <div class="d-flex justifiy-content-between">
+                              <div class="p-1 mr-auto">{% trans "Fait par : "%} {{diagnostic.document.author.user.username}}</div>
+                              {% if request.user|has_group:"medecin" %}
+                                    <div class="p-1">
+                                        <a href="#" ><i class="fa fa-plus"></i></a>
+                                    </div>
+                              {% endif %}
+                          </div>
+                      </div>
+                      <div class="card-body"  style="cursor:pointer"data-toggle="modal" data-target="#myModalDiag{{ forloop.counter }}" >{% trans "Contenu : " %} {{diagnostic.observation|reduce_string:"25"}}</div>
+                      <div class="modal fade" id="myModalDiag{{ forloop.counter }}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">{% trans "Contenu du diagnostic" %}</h4>
+                              <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                               {{diagnostic.observation}}
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans "Fermer" %}</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                          <div class="d-flex justify-content-end">
+                              <div class="p-1">
+                                  {% trans "Fait le : "%} {{diagnostic.document.date_creation}}
+                              </div>
+                          </div>
+
+                      </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% empty %}
+            <div class="alert alert-warning" style="width: 100%; margin-top:5px; text-align:center">
+              {% trans "Aucun document 'ordonnance' est disponible" %}
+            </div>
+        {% endfor %}
+    </div>
+
+     <div id="ordonnance-block" class="row">
+        {% for ordonnance in ordonnances %}
+            {% if ordonnance.document.complet %}
+                <div class="col-md-3">
+                    <div class="card" >
+                      <div class="card-header bg-info text-white">
+                          <div class="d-flex justifiy-content-between">
+                              <div class="p-1 mr-auto">{% trans "Fait par : "%} {{ordonnance.document.author.user.username}}</div>
+                              {% if request.user|has_group:"medecin" %}
+                                    <div class="p-1">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Valider/Modifer l'ordonnance"><i class="fa fa-plus"></i></a>
+                                    </div>
+                              {% endif %}
+                          </div>
+                      </div>
+                      <div class="card-body" data-toggle="modal" data-target="#myModalOrdo{{ forloop.counter }}" >{% trans "Contenu : " %} {{ ordonnance.texte|reduce_string:"25" }}</div>
+                      <div class="modal fade" id="myModalOrdo{{ forloop.counter }}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">{% trans "Contenu de l'ordonnance" %}</h4>
+                              <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                               {{ordonnance.texte}}
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans "Fermer" %}</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer bg-info text-white">
+                          <div class="d-flex justify-content-end">
+                              <div class="p-1">
+                                  {% trans "Fait le : "%} {{ordonnance.document.date_creation}}
+                              </div>
+                          </div>
+
+                      </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-3">
+                    <div class="card" >
+                      <div class="card-header">
+                          <div class="d-flex justifiy-content-between">
+                              <div class="p-1 mr-auto">{% trans "Fait par : "%} {{ordonnance.document.author.user.username}}</div>
+                              {% if request.user|has_group:"medecin" %}
+                                    <div class="p-1">
+                                        <a href="#" ><i class="fa fa-plus"></i></a>
+                                    </div>
+                              {% endif %}
+                          </div>
+                      </div>
+                      <div class="card-body"  style="cursor:pointer"data-toggle="modal" data-target="#myModalOrdo{{ forloop.counter }}" >{% trans "Contenu : " %} {{ ordonnance.texte|reduce_string:"25" }}</div>
+                      <div class="modal fade" id="myModalOrdo{{ forloop.counter }}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">{% trans "Contenu de l'ordonnance" %}</h4>
+                              <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                               {{ordonnance.texte}}
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans "Fermer" %}</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                          <div class="d-flex justify-content-end">
+                              <div class="p-1">
+                                  {% trans "Fait le : "%} {{ordonnance.document.date_creation}}
+                              </div>
+                          </div>
+
+                      </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% empty %}
+            <div class="alert alert-warning" style="width: 100%; margin-top:5px; text-align:center">
+              {% trans "Aucun document 'ordonnance' est disponible" %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="soin-block" class="row">
+        {% for soin in soins %}
+            {% if soin.document.complet %}
+                <div class="col-md-3">
+                    <div class="card" >
+                      <div class="card-header bg-info text-white">
+                          <div class="d-flex justifiy-content-between">
+                              <div class="p-1 mr-auto">{% trans "Fait par : "%} {{soin.document.author.user.username}}</div>
+                          </div>
+                      </div>
+                      <div class="card-body" data-toggle="modal" data-target="#myModalSoin{{ forloop.counter }}" >{% trans "Contenu : " %} {{ soin.texte|reduce_string:"25" }}</div>
+                      <div class="modal fade" id="myModalSoin{{ forloop.counter }}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">{% trans "Contenu de la fiche de soin" %}</h4>
+                              <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                               {{soin.texte}}
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans "Fermer" %}</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer bg-info text-white">
+                          <div class="d-flex justify-content-end">
+                              <div class="p-1">
+                                  {% trans "Fait le : "%} {{soin.document.date_creation}}
+                              </div>
+                          </div>
+
+                      </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-3">
+                    <div class="card" >
+                      <div class="card-header">
+                          <div class="d-flex justifiy-content-between">
+                              <div class="p-1 mr-auto">{% trans "Fait par : "%} {{soin.document.author.user.username}}</div>
+                          </div>
+                      </div>
+                      <div class="card-body"  style="cursor:pointer"data-toggle="modal" data-target="#myModalSoin{{ forloop.counter }}" >{% trans "Contenu : " %} {{ soin.texte|reduce_string:"25" }}</div>
+                      <div class="modal fade" id="myModalSoin{{ forloop.counter }}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">{% trans "Contenu de la fiche de soin" %}</h4>
+                              <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                               {{soin.texte}}
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans "Fermer" %}</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                          <div class="d-flex justify-content-end">
+                              <div class="p-1">
+                                  {% trans "Fait le : "%} {{soin.document.date_creation}}
+                              </div>
+                          </div>
+
+                      </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% empty %}
+            <div class="alert alert-warning" style="width: 100%; margin-top:5px; text-align:center">
+              {% trans "Aucun document 'soin' est disponible" %}
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
+
+{% block script_block %}
+<script>
+$('#button-toggle-patient').click('slow', function(){
+    if ($("#icon-toggle-patient").hasClass("fa-chevron-up")){
+        $("#icon-toggle-patient").removeClass("fa fa-chevron-up").addClass("fa fa-chevron-down");
+    } else {
+        $("#icon-toggle-patient").removeClass("fa fa-chevron-down").addClass("fa fa-chevron-up");
+    }
+    $("#patient-card").toggle();
+});
+</script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+<script>
+    $(document).ready(function(){
+        $("#ordonnance-block").hide();
+        $("#diagnostic-block").hide();
+        $("#soin-block").hide();
+    });
+</script>
+<script>
+    $('.btn-group > button').click(function(){
+        var types = ["ordonnance", "soin", "operation", "diagnostic"]
+        var type = $(this).data("type");
+        types.splice(types.indexOf(type), 1);
+        for (elem of types){
+            $('#'+elem+'-block').hide();
+            $('[data-type='+elem+']').removeClass("active");
+        }
+        $('#'+type+"-block").show();
+        $(this).addClass("active")
+        $("#search-input-dossier").val("");
+        $('[id$=-block] > .col-md-3').filter(function() {
+            $(this).show();
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+      $("#search-input-dossier").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $('[id$=-block]:visible > .col-md-3').filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+
+</script>
+{% endblock %}

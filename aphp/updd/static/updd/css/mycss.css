@@ -1,0 +1,110 @@
+html, body {
+ height : 100%;
+}
+
+h4 {
+    margin : 0px;
+}
+
+hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.45);
+}
+
+.left-navbar {
+    background-color :#5189e2;
+    height: auto !important;
+    padding-top: 10px;
+}
+
+
+.left-navbar a:hover {
+    text-decoration: underline
+}
+
+.person-role-div {
+    background-color : #6394e2;
+    border-radius : 2px;
+}
+
+.shortcut-button {
+    background-color : white;
+    color : black !important;
+    padding : 10px;
+}
+
+.shortcut-button:hover {
+    background-color : #bec1c6;
+}
+
+.nav-link {
+    color : white !important;
+}
+
+.dropdown-toggle:hover {
+    cursor : pointer;
+}
+
+#title-block {
+    background-color : #8eb7f9  !important;
+    border: 2px solid #5189E2;
+    text-align : center;
+}
+
+.bg-uppd {
+    background-color: #5189E2;
+    color : white;
+}
+
+/* Partie accueil menu principal */
+#accueil-container-menu .card-body {
+    font-size : 70px;
+    text-align : center
+}
+
+#accueil-container-menu .card {
+    margin-bottom : 20px;
+}
+
+
+/* Antoine */
+.profil{
+  padding: 10px 15px 10px 18px;
+  border-width: 1px;
+  border-color: rgb(3, 3, 2);
+  border-style: groove;
+  margin: 1%;
+  border-radius: 15px;
+}
+
+/* Antoine & Cyril*/
+.agenda{
+  display: block;
+  margin:0 auto;
+}
+
+/* On change le padding du card body */
+#title-block .card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 0.25rem !important;
+}
+
+.btn-small-menu {
+    background-color: rgb(255,255,255, 0.4)
+}
+
+.btn-margin {
+    margin-bottom:5px;
+}
+
+/* Footer de la page de login */
+#footer-login {
+ background-color:#5189E2!important;
+ color :white;
+ height: 50px;
+}
+
+/* On enlève le margin des label */
+label {
+    margin-bottom: unset;
+}

@@ -1,0 +1,104 @@
+{% extends "../updd/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+<h4>{% trans 'Connexion' %}</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top:20px">
+
+{% if form.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <ul>
+        {% for error in form.non_field_errors %}
+            <li> {{ error|escape }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+
+
+{% if next %}
+    {% if not user.is_authenticated %}
+    <div class="alert alert-dark alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% trans "Pour accéder à la page, il faut se connecter via le formulaire" %}
+    </div>
+    {% endif %}
+{% endif %}
+
+
+
+<form method="post" action="{% url 'login' %}">
+    <div id="login-form-block" style="margin: 0 auto; width:33%; margin-top: 100px">
+    {% csrf_token %}
+    {% for field in form %}
+        {% if field.errors %}
+            <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <ul>
+                {% for error in field.errors %}
+                    <li> {{ error|escape }}</li>
+                {% endfor %}
+            </ul>
+            </div>
+        {% endif %}
+        <div class="input-group mb-3" style="margin-bottom:10px;">
+            <div class="input-group-prepend">
+              <span class="input-group-text" >{{ field.label_tag }}</span>
+            </div>
+            {{ field }}
+        </div>
+    {% endfor %}
+     <div class="custom-control custom-switch">
+        <input type="checkbox" onclick="myFunction()" class="custom-control-input" id="switch1">
+        <label class="custom-control-label" for="switch1">{% trans 'Voir mot de passe' %}</label>
+    </div>
+    <br>
+    <input type="submit" value="{% trans 'Se connecter' %}" class="btn btn-primary btn-block" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+        <a href={% url "password_reset" %}> {% trans 'Mot de passe oublié ?' %}</a>
+    </div>
+</div>
+
+ <nav class="navbar navbar-expand-sm bg-info navbar-dark fixed-bottom" id="footer-login">
+     <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <img style="height:70px;" src="{% static 'updd/img/pine.png' %}">
+            </li>
+            <li class="nav-item" style="padding-top:25px">
+                <p>Pine'Apple</p>
+            </li>
+        </ul>
+</nav>
+
+{% endblock %}
+
+{% block script_block %}
+<script>
+    function myFunction() {
+      var x = document.getElementById("id_password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+</script>
+<script>
+    $(document).ready(function(){
+        $("#leftnav").hide();
+        //$("#title-block").hide();
+        $("#main-container").attr("class", "col-md-12");
+        $("#main-container").removeAttr("style");
+        console.log($("#main-container"));
+        $('#id_password').addClass("form-control");
+        $('#id_username').addClass("form-control");
+    });
+</script>
+{% endblock %}
